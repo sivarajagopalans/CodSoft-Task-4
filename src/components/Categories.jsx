@@ -94,8 +94,8 @@ export const Categories = () => {
                 <h2 className="text-center my-4">Jewelery Products</h2>
                 <Slider {...settings}>
                     {jeweleryList.map((value, index) => (
-                        <Row className="my-4 mx-2">
-                            <Col key={index}>
+                        <Row className="my-4 mx-2" key={index}>
+                            <Col>
                                 <CardGroup>
                                     <Card>
                                         <Card.Img variant="top" height={"250px"} width={"100px"} src={value.image} />
@@ -103,8 +103,8 @@ export const Categories = () => {
                                             <Card.Title>{value.title}</Card.Title>
                                             <Card.Text>{value.description}</Card.Text>
                                         </Card.Body>
-                                        <Card.Footer className='d-flex justify-content-around'>
-                                            <Button variant="primary">view</Button>
+                                        <Card.Footer className='d-flex justify-content-around align-items-center'>
+                                            <Card.Text className='m-0'>{value.price + '$'}</Card.Text>
                                             <Button variant="primary">Add to Card</Button>
                                         </Card.Footer>
                                     </Card>
@@ -119,8 +119,8 @@ export const Categories = () => {
                 <h2 className="text-center my-4">Electronics Products</h2>
                 <Slider {...settings}>
                     {electronicsList.map((value, index) => (
-                        <Row className="my-4 mx-2">
-                            <Col key={index}>
+                        <Row className="my-4 mx-2" key={index}>
+                            <Col>
                                 <CardGroup>
                                     <Card>
                                         <Card.Img variant="top" height={"300px"} width={"100px"} src={value.image} />
@@ -128,8 +128,8 @@ export const Categories = () => {
                                             <Card.Title>{value.title}</Card.Title>
                                             <Card.Text>{value.description}</Card.Text>
                                         </Card.Body>
-                                        <Card.Footer className='d-flex justify-content-around'>
-                                            <Button variant="primary">view</Button>
+                                        <Card.Footer className='d-flex justify-content-around align-items-center'>
+                                            <Card.Text className='m-0'>{value.price + '$'}</Card.Text>
                                             <Button variant="primary">Add to Card</Button>
                                         </Card.Footer>
                                     </Card>
@@ -144,8 +144,8 @@ export const Categories = () => {
                 <h2 className="text-center my-4">Men's Clothes Products</h2>
                 <Slider {...settings}>
                     {menClothesList.map((value, index) => (
-                        <Row className="my-4 mx-2">
-                            <Col key={index}>
+                        <Row className="my-4 mx-2" key={index}>
+                            <Col>
                                 <CardGroup>
                                     <Card>
                                         <Card.Img variant="top" height={"300px"} width={"100px"} src={value.image} />
@@ -153,8 +153,8 @@ export const Categories = () => {
                                             <Card.Title>{value.title}</Card.Title>
                                             <Card.Text>{value.description}</Card.Text>
                                         </Card.Body>
-                                        <Card.Footer className='d-flex justify-content-around'>
-                                            <Button variant="primary">view</Button>
+                                        <Card.Footer className='d-flex justify-content-around align-items-center'>
+                                            <Card.Text className='m-0'>{value.price + '$'}</Card.Text>
                                             <Button variant="primary">Add to Card</Button>
                                         </Card.Footer>
                                     </Card>
@@ -169,8 +169,8 @@ export const Categories = () => {
                 <h2 className="g-4 text-center my-4">Women Clothes Products</h2>
                 <Slider {...settings}>
                     {womenClothesList.map((value, index) => (
-                        <Row className="my-4 mx-2">
-                            <Col key={index}>
+                        <Row className="my-4 mx-2" key={index}>
+                            <Col>
                                 <CardGroup>
                                     <Card>
                                         <Card.Img variant="top" height={"300px"} width={"100px"} src={value.image} />
@@ -178,8 +178,8 @@ export const Categories = () => {
                                             <Card.Title>{value.title}</Card.Title>
                                             <Card.Text>{value.description}</Card.Text>
                                         </Card.Body>
-                                        <Card.Footer className='d-flex justify-content-around'>
-                                            <Button variant="primary">view</Button>
+                                        <Card.Footer className='d-flex justify-content-around align-items-center'>
+                                            <Card.Text className='m-0'>{value.price + '$'}</Card.Text>
                                             <Button variant="primary">Add to Card</Button>
                                         </Card.Footer>
                                     </Card>
@@ -197,8 +197,8 @@ export const Categories = () => {
                 <h2 className="text-center my-4">Women Clothes Products</h2>
                 <Slider {...settings}>
                     {womenClothesList.map((value, index) => (
-                        <Row className="mx-2 my-4">
-                            <Col key={index}>
+                        <Row className="mx-2 my-4" key={index}>
+                            <Col>
                                 <CardGroup>
                                     <Card>
                                         <Card.Img variant="top" height={"300px"} width={"100px"} src={value.image} />
@@ -206,8 +206,8 @@ export const Categories = () => {
                                             <Card.Title>{value.title}</Card.Title>
                                             <Card.Text>{value.description}</Card.Text>
                                         </Card.Body>
-                                        <Card.Footer className='d-flex justify-content-around'>
-                                            <Button variant="primary">view</Button>
+                                        <Card.Footer className='d-flex justify-content-around align-items-center'>
+                                           <Card.Text className='m-0'>{value.price+'$'}</Card.Text>
                                             <Button variant="primary">Add to Card</Button>
                                         </Card.Footer>
                                     </Card>
