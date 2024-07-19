@@ -79,6 +79,7 @@ export const Categories = () => {
             setElectronicsList(data_electronics);
             setMenClothesList(data_mens);
             setWomenClothesList(data_womens);
+            console.log("fdf");
             return;
 
         } catch (error) {
