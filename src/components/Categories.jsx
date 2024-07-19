@@ -8,6 +8,8 @@ import Button from 'react-bootstrap/Button';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useDispatch } from 'react-redux'
+import { addCart } from '../slices/productsSlices';
 
 export const Categories = () => {
 
@@ -88,6 +90,13 @@ export const Categories = () => {
         products();
     }, []);
 
+    const dispatch = useDispatch();
+
+    const AddToCard = (value) => {
+        console.log("jj");
+        dispatch(addCart(value));
+    }
+
     return (
         <>
             <Container>
@@ -105,7 +114,7 @@ export const Categories = () => {
                                         </Card.Body>
                                         <Card.Footer className='d-flex justify-content-around align-items-center'>
                                             <Card.Text className='m-0'>{value.price + '$'}</Card.Text>
-                                            <Button variant="primary">Add to Card</Button>
+                                            <Button variant="primary" onClick={() => AddToCard(value)}>Add to Card</Button>
                                         </Card.Footer>
                                     </Card>
                                 </CardGroup>
@@ -130,7 +139,7 @@ export const Categories = () => {
                                         </Card.Body>
                                         <Card.Footer className='d-flex justify-content-around align-items-center'>
                                             <Card.Text className='m-0'>{value.price + '$'}</Card.Text>
-                                            <Button variant="primary">Add to Card</Button>
+                                            <Button variant="primary" onClick={() => AddToCard(value)}>Add to Card</Button>
                                         </Card.Footer>
                                     </Card>
                                 </CardGroup>
@@ -155,7 +164,7 @@ export const Categories = () => {
                                         </Card.Body>
                                         <Card.Footer className='d-flex justify-content-around align-items-center'>
                                             <Card.Text className='m-0'>{value.price + '$'}</Card.Text>
-                                            <Button variant="primary">Add to Card</Button>
+                                            <Button variant="primary" onClick={() => AddToCard(value)}>Add to Card</Button>
                                         </Card.Footer>
                                     </Card>
                                 </CardGroup>
@@ -180,7 +189,7 @@ export const Categories = () => {
                                         </Card.Body>
                                         <Card.Footer className='d-flex justify-content-around align-items-center'>
                                             <Card.Text className='m-0'>{value.price + '$'}</Card.Text>
-                                            <Button variant="primary">Add to Card</Button>
+                                            <Button variant="primary" onClick={() => AddToCard(value)}>Add to Card</Button>
                                         </Card.Footer>
                                     </Card>
                                 </CardGroup>
