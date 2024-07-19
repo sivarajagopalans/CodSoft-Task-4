@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       <NavbarComponent/>
-      {/* <Cards/> */}
+      <Cards/>
       <Categories/>
     </>
   )
