@@ -8,10 +8,12 @@ import Button from 'react-bootstrap/Button';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useDispatch } from 'react-redux'
-import { addCart } from '../slices/productsSlices';
+import { useDispatch, useSelector } from 'react-redux'
+import { addCart, removeCart } from '../slices/productsSlices';
 
 export const Categories = () => {
+
+    const { cartList } = useSelector((state) => state.products)
 
     var settings = {
         dots: false,
@@ -79,7 +81,7 @@ export const Categories = () => {
             setElectronicsList(data_electronics);
             setMenClothesList(data_mens);
             setWomenClothesList(data_womens);
-            console.log("fdf");
+            console.log("render sucess");
             return;
 
         } catch (error) {
@@ -93,11 +95,16 @@ export const Categories = () => {
 
     const dispatch = useDispatch();
 
-    const AddToCard = (value) => {
-        console.log("jj");
+    const AddToCart = (value) => {
+        console.log("added sucess");
         dispatch(addCart(value));
     }
 
+    const RomoveFromCart = (value) => {
+        console.log("remove sucess");
+        dispatch(removeCart(value.id))
+        // console.log(cartList);
+    }
     return (
         <>
             <Container>
@@ -108,14 +115,21 @@ export const Categories = () => {
                             <Col>
                                 <CardGroup>
                                     <Card>
-                                        <Card.Img variant="top" height={"250px"} width={"100px"} src={value.image} />
-                                        <Card.Body style={{ height: "350px", overflow: "hidden" }}>
+                                        <Card.Img variant="top" height={"180px"} width={"100px"} className='p-4' src={value.image} />
+                                        <Card.Body style={{ height: "200px", overflow: "hidden" }}>
                                             <Card.Title>{value.title}</Card.Title>
                                             <Card.Text>{value.description}</Card.Text>
                                         </Card.Body>
                                         <Card.Footer className='d-flex justify-content-around align-items-center'>
                                             <Card.Text className='m-0'>{value.price + '$'}</Card.Text>
-                                            <Button variant="primary" onClick={() => AddToCard(value)}>Add to Card</Button>
+                                            {
+                                                cartList.some((cartId) => cartId.id == value.id
+                                                ) ?
+                                                    (<Button variant="primary" onClick={() => RomoveFromCart(value)}>Romove Cart</Button>)
+                                                    :
+                                                    (<Button variant="primary" onClick={() => AddToCart(value)}>Add to Cart</Button>)
+                                            }
+
                                         </Card.Footer>
                                     </Card>
                                 </CardGroup>
@@ -133,14 +147,20 @@ export const Categories = () => {
                             <Col>
                                 <CardGroup>
                                     <Card>
-                                        <Card.Img variant="top" height={"300px"} width={"100px"} src={value.image} />
-                                        <Card.Body style={{ height: "350px", overflow: "hidden" }}>
+                                        <Card.Img variant="top" height={"180px"} width={"100px"} className='p-4' src={value.image} />
+                                        <Card.Body style={{ height: "200px", overflow: "hidden" }}>
                                             <Card.Title>{value.title}</Card.Title>
                                             <Card.Text>{value.description}</Card.Text>
                                         </Card.Body>
                                         <Card.Footer className='d-flex justify-content-around align-items-center'>
                                             <Card.Text className='m-0'>{value.price + '$'}</Card.Text>
-                                            <Button variant="primary" onClick={() => AddToCard(value)}>Add to Card</Button>
+                                            {
+                                                cartList.some((cartId) => cartId.id == value.id
+                                                ) ?
+                                                    (<Button variant="primary" onClick={() => RomoveFromCart(value)}>Romove Cart</Button>)
+                                                    :
+                                                    (<Button variant="primary" onClick={() => AddToCart(value)}>Add to Cart</Button>)
+                                            }
                                         </Card.Footer>
                                     </Card>
                                 </CardGroup>
@@ -158,14 +178,20 @@ export const Categories = () => {
                             <Col>
                                 <CardGroup>
                                     <Card>
-                                        <Card.Img variant="top" height={"300px"} width={"100px"} src={value.image} />
-                                        <Card.Body style={{ height: "350px", overflow: "hidden" }}>
+                                        <Card.Img variant="top" height={"180px"} width={"100px"} className='p-4' src={value.image} />
+                                        <Card.Body style={{ height: "200px", overflow: "hidden" }}>
                                             <Card.Title>{value.title}</Card.Title>
                                             <Card.Text>{value.description}</Card.Text>
                                         </Card.Body>
                                         <Card.Footer className='d-flex justify-content-around align-items-center'>
                                             <Card.Text className='m-0'>{value.price + '$'}</Card.Text>
-                                            <Button variant="primary" onClick={() => AddToCard(value)}>Add to Card</Button>
+                                            {
+                                                cartList.some((cartId) => cartId.id == value.id
+                                                ) ?
+                                                    (<Button variant="primary" onClick={() => RomoveFromCart(value)}>Romove Cart</Button>)
+                                                    :
+                                                    (<Button variant="primary" onClick={() => AddToCart(value)}>Add to Cart</Button>)
+                                            }
                                         </Card.Footer>
                                     </Card>
                                 </CardGroup>
@@ -183,14 +209,20 @@ export const Categories = () => {
                             <Col>
                                 <CardGroup>
                                     <Card>
-                                        <Card.Img variant="top" height={"300px"} width={"100px"} src={value.image} />
-                                        <Card.Body style={{ height: "350px", overflow: "hidden" }}>
+                                        <Card.Img variant="top" height={"180px"} width={"100px"} className='p-4' src={value.image} />
+                                        <Card.Body style={{ height: "200px", overflow: "hidden" }}>
                                             <Card.Title>{value.title}</Card.Title>
                                             <Card.Text>{value.description}</Card.Text>
                                         </Card.Body>
                                         <Card.Footer className='d-flex justify-content-around align-items-center'>
                                             <Card.Text className='m-0'>{value.price + '$'}</Card.Text>
-                                            <Button variant="primary" onClick={() => AddToCard(value)}>Add to Card</Button>
+                                            {
+                                                cartList.some((cartId) => cartId.id == value.id
+                                                ) ?
+                                                    (<Button variant="primary" onClick={() => RomoveFromCart(value)}>Romove Cart</Button>)
+                                                    :
+                                                    (<Button variant="primary" onClick={() => AddToCart(value)}>Add to Cart</Button>)
+                                            }
                                         </Card.Footer>
                                     </Card>
                                 </CardGroup>

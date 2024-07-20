@@ -14,7 +14,7 @@ export const NavbarComponent = () => {
           <Navbar.Collapse id="responsive-navbar-nav" className='justify-content-end'>
             <Nav className='d-flex w-25 justify-content-around'>
               <Link to='/' className='h4 text-decoration-none'>Home</Link>
-              <Link to='/cards' className='text-decoration-none text-secondary'>
+              <Link to='/cart' className='text-decoration-none text-secondary'>
                 <i className="bi bi-cart h4"></i></Link>
             </Nav>
           </Navbar.Collapse>
