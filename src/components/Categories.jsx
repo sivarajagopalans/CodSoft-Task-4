@@ -10,6 +10,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useDispatch, useSelector } from 'react-redux'
 import { addCart, removeCart } from '../slices/productsSlices';
+import { PreLoader } from './PreLoader';
 
 export const Categories = () => {
 
@@ -32,7 +33,7 @@ export const Categories = () => {
                 }
             },
             {
-                breakpoint: 600,
+                breakpoint: 768,
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 1,
@@ -55,6 +56,8 @@ export const Categories = () => {
     const [menClothesList, setMenClothesList] = useState([]);
     const [womenClothesList, setWomenClothesList] = useState([]);
 
+    const [preloader, setPreloader] = useState(false);
+
     const products = async () => {
         // const url = 'https://fakestoreapi.com/products';
         const jewelery_url = "https://fakestoreapi.com/products/category/jewelery"
@@ -64,7 +67,7 @@ export const Categories = () => {
         try {
             // const res = await fetch(url);
             // const data = await res.json();
-
+            setPreloader(true);
             const res_jewelery = await fetch(jewelery_url);
             const data_jewelery = await res_jewelery.json();
 
@@ -87,6 +90,10 @@ export const Categories = () => {
         } catch (error) {
             console.error(error.message)
         }
+        finally {
+            setPreloader(false);
+
+        }
 
     }
     useEffect(() => {
@@ -107,158 +114,135 @@ export const Categories = () => {
     }
     return (
         <>
-            <Container>
-                <h2 className="text-center my-4">Jewelery Products</h2>
-                <Slider {...settings}>
-                    {jeweleryList.map((value, index) => (
-                        <Row className="my-4 mx-2" key={index}>
-                            <Col>
-                                <CardGroup>
-                                    <Card>
-                                        <Card.Img variant="top" height={"180px"} width={"100px"} className='p-4' src={value.image} />
-                                        <Card.Body style={{ height: "200px", overflow: "hidden" }}>
-                                            <Card.Title>{value.title}</Card.Title>
-                                            <Card.Text>{value.description}</Card.Text>
-                                        </Card.Body>
-                                        <Card.Footer className='d-flex justify-content-around align-items-center'>
-                                            <Card.Text className='m-0'>{value.price + '$'}</Card.Text>
-                                            {
-                                                cartList.some((cartId) => cartId.id == value.id
-                                                ) ?
-                                                    (<Button variant="primary" onClick={() => RomoveFromCart(value)}>Romove Cart</Button>)
-                                                    :
-                                                    (<Button variant="primary" onClick={() => AddToCart(value)}>Add to Cart</Button>)
-                                            }
+            {preloader && preloader ? <PreLoader/> :
 
-                                        </Card.Footer>
-                                    </Card>
-                                </CardGroup>
-                            </Col>
-                        </Row>
-                    ))}
-                </Slider>
-            </Container>
+                <div>
+                    <Container>
+                        <h2 className="text-center my-4">Jewelery Products</h2>
+                        <Slider {...settings}>
+                            {jeweleryList.map((value, index) => (
+                                <Row className="my-4 mx-2" key={index}>
+                                    <Col>
+                                        <CardGroup>
+                                            <Card>
+                                                <Card.Img variant="top" height={"180px"} width={"100px"} className='p-4' src={value.image} />
+                                                <Card.Body style={{ height: "200px", overflow: "hidden" }}>
+                                                    <Card.Title>{value.title}</Card.Title>
+                                                    <Card.Text>{value.description}</Card.Text>
+                                                </Card.Body>
+                                                <Card.Footer className='d-flex justify-content-around align-items-center'>
+                                                    <Card.Text className='m-0'>{value.price + '$'}</Card.Text>
+                                                    {
+                                                        cartList.some((cartId) => cartId.id == value.id
+                                                        ) ?
+                                                            (<Button variant="primary" onClick={() => RomoveFromCart(value)}>Romove Cart</Button>)
+                                                            :
+                                                            (<Button variant="primary" onClick={() => AddToCart(value)}>Add to Cart</Button>)
+                                                    }
 
-            <Container>
-                <h2 className="text-center my-4">Electronics Products</h2>
-                <Slider {...settings}>
-                    {electronicsList.map((value, index) => (
-                        <Row className="my-4 mx-2" key={index}>
-                            <Col>
-                                <CardGroup>
-                                    <Card>
-                                        <Card.Img variant="top" height={"180px"} width={"100px"} className='p-4' src={value.image} />
-                                        <Card.Body style={{ height: "200px", overflow: "hidden" }}>
-                                            <Card.Title>{value.title}</Card.Title>
-                                            <Card.Text>{value.description}</Card.Text>
-                                        </Card.Body>
-                                        <Card.Footer className='d-flex justify-content-around align-items-center'>
-                                            <Card.Text className='m-0'>{value.price + '$'}</Card.Text>
-                                            {
-                                                cartList.some((cartId) => cartId.id == value.id
-                                                ) ?
-                                                    (<Button variant="primary" onClick={() => RomoveFromCart(value)}>Romove Cart</Button>)
-                                                    :
-                                                    (<Button variant="primary" onClick={() => AddToCart(value)}>Add to Cart</Button>)
-                                            }
-                                        </Card.Footer>
-                                    </Card>
-                                </CardGroup>
-                            </Col>
-                        </Row>
-                    ))}
-                </Slider>
-            </Container>
+                                                </Card.Footer>
+                                            </Card>
+                                        </CardGroup>
+                                    </Col>
+                                </Row>
+                            ))}
+                        </Slider>
+                    </Container>
 
-            <Container>
-                <h2 className="text-center my-4">Men's Clothes Products</h2>
-                <Slider {...settings}>
-                    {menClothesList.map((value, index) => (
-                        <Row className="my-4 mx-2" key={index}>
-                            <Col>
-                                <CardGroup>
-                                    <Card>
-                                        <Card.Img variant="top" height={"180px"} width={"100px"} className='p-4' src={value.image} />
-                                        <Card.Body style={{ height: "200px", overflow: "hidden" }}>
-                                            <Card.Title>{value.title}</Card.Title>
-                                            <Card.Text>{value.description}</Card.Text>
-                                        </Card.Body>
-                                        <Card.Footer className='d-flex justify-content-around align-items-center'>
-                                            <Card.Text className='m-0'>{value.price + '$'}</Card.Text>
-                                            {
-                                                cartList.some((cartId) => cartId.id == value.id
-                                                ) ?
-                                                    (<Button variant="primary" onClick={() => RomoveFromCart(value)}>Romove Cart</Button>)
-                                                    :
-                                                    (<Button variant="primary" onClick={() => AddToCart(value)}>Add to Cart</Button>)
-                                            }
-                                        </Card.Footer>
-                                    </Card>
-                                </CardGroup>
-                            </Col>
-                        </Row>
-                    ))}
-                </Slider >
-            </Container>
+                    <Container>
+                        <h2 className="text-center my-4">Electronics Products</h2>
+                        <Slider {...settings}>
+                            {electronicsList.map((value, index) => (
+                                <Row className="my-4 mx-2" key={index}>
+                                    <Col>
+                                        <CardGroup>
+                                            <Card>
+                                                <Card.Img variant="top" height={"180px"} width={"100px"} className='p-4' src={value.image} />
+                                                <Card.Body style={{ height: "200px", overflow: "hidden" }}>
+                                                    <Card.Title>{value.title}</Card.Title>
+                                                    <Card.Text>{value.description}</Card.Text>
+                                                </Card.Body>
+                                                <Card.Footer className='d-flex justify-content-around align-items-center'>
+                                                    <Card.Text className='m-0'>{value.price + '$'}</Card.Text>
+                                                    {
+                                                        cartList.some((cartId) => cartId.id == value.id
+                                                        ) ?
+                                                            (<Button variant="primary" onClick={() => RomoveFromCart(value)}>Romove Cart</Button>)
+                                                            :
+                                                            (<Button variant="primary" onClick={() => AddToCart(value)}>Add to Cart</Button>)
+                                                    }
+                                                </Card.Footer>
+                                            </Card>
+                                        </CardGroup>
+                                    </Col>
+                                </Row>
+                            ))}
+                        </Slider>
+                    </Container>
 
-            <Container>
-                <h2 className="g-4 text-center my-4">Women Clothes Products</h2>
-                <Slider {...settings}>
-                    {womenClothesList.map((value, index) => (
-                        <Row className="my-4 mx-2" key={index}>
-                            <Col>
-                                <CardGroup>
-                                    <Card>
-                                        <Card.Img variant="top" height={"180px"} width={"100px"} className='p-4' src={value.image} />
-                                        <Card.Body style={{ height: "200px", overflow: "hidden" }}>
-                                            <Card.Title>{value.title}</Card.Title>
-                                            <Card.Text>{value.description}</Card.Text>
-                                        </Card.Body>
-                                        <Card.Footer className='d-flex justify-content-around align-items-center'>
-                                            <Card.Text className='m-0'>{value.price + '$'}</Card.Text>
-                                            {
-                                                cartList.some((cartId) => cartId.id == value.id
-                                                ) ?
-                                                    (<Button variant="primary" onClick={() => RomoveFromCart(value)}>Romove Cart</Button>)
-                                                    :
-                                                    (<Button variant="primary" onClick={() => AddToCart(value)}>Add to Cart</Button>)
-                                            }
-                                        </Card.Footer>
-                                    </Card>
-                                </CardGroup>
-                            </Col>
-                        </Row>
-                    ))}
-                </Slider>
-            </Container>
+                    <Container>
+                        <h2 className="text-center my-4">Men's Clothes Products</h2>
+                        <Slider {...settings}>
+                            {menClothesList.map((value, index) => (
+                                <Row className="my-4 mx-2" key={index}>
+                                    <Col>
+                                        <CardGroup>
+                                            <Card>
+                                                <Card.Img variant="top" height={"180px"} width={"100px"} className='p-4' src={value.image} />
+                                                <Card.Body style={{ height: "200px", overflow: "hidden" }}>
+                                                    <Card.Title>{value.title}</Card.Title>
+                                                    <Card.Text>{value.description}</Card.Text>
+                                                </Card.Body>
+                                                <Card.Footer className='d-flex justify-content-around align-items-center'>
+                                                    <Card.Text className='m-0'>{value.price + '$'}</Card.Text>
+                                                    {
+                                                        cartList.some((cartId) => cartId.id == value.id
+                                                        ) ?
+                                                            (<Button variant="primary" onClick={() => RomoveFromCart(value)}>Romove Cart</Button>)
+                                                            :
+                                                            (<Button variant="primary" onClick={() => AddToCart(value)}>Add to Cart</Button>)
+                                                    }
+                                                </Card.Footer>
+                                            </Card>
+                                        </CardGroup>
+                                    </Col>
+                                </Row>
+                            ))}
+                        </Slider >
+                    </Container>
 
-
-            {/* /////////////////// */}
-
-            {/* <Container>
-                <h2 className="text-center my-4">Women Clothes Products</h2>
-                <Slider {...settings}>
-                    {womenClothesList.map((value, index) => (
-                        <Row className="mx-2 my-4" key={index}>
-                            <Col>
-                                <CardGroup>
-                                    <Card>
-                                        <Card.Img variant="top" height={"300px"} width={"100px"} src={value.image} />
-                                        <Card.Body style={{ height: "350px", overflow: "hidden" }}>
-                                            <Card.Title>{value.title}</Card.Title>
-                                            <Card.Text>{value.description}</Card.Text>
-                                        </Card.Body>
-                                        <Card.Footer className='d-flex justify-content-around align-items-center'>
-                                           <Card.Text className='m-0'>{value.price+'$'}</Card.Text>
-                                            <Button variant="primary">Add to Card</Button>
-                                        </Card.Footer>
-                                    </Card>
-                                </CardGroup>
-                            </Col>
-                        </Row>
-                    ))}
-                </Slider>
-            </Container> */}
+                    <Container>
+                        <h2 className="g-4 text-center my-4">Women Clothes Products</h2>
+                        <Slider {...settings}>
+                            {womenClothesList.map((value, index) => (
+                                <Row className="my-4 mx-2" key={index}>
+                                    <Col>
+                                        <CardGroup>
+                                            <Card>
+                                                <Card.Img variant="top" height={"180px"} width={"100px"} className='p-4' src={value.image} />
+                                                <Card.Body style={{ height: "200px", overflow: "hidden" }}>
+                                                    <Card.Title>{value.title}</Card.Title>
+                                                    <Card.Text>{value.description}</Card.Text>
+                                                </Card.Body>
+                                                <Card.Footer className='d-flex justify-content-around align-items-center'>
+                                                    <Card.Text className='m-0'>{value.price + '$'}</Card.Text>
+                                                    {
+                                                        cartList.some((cartId) => cartId.id == value.id
+                                                        ) ?
+                                                            (<Button variant="primary" onClick={() => RomoveFromCart(value)}>Romove Cart</Button>)
+                                                            :
+                                                            (<Button variant="primary" onClick={() => AddToCart(value)}>Add to Cart</Button>)
+                                                    }
+                                                </Card.Footer>
+                                            </Card>
+                                        </CardGroup>
+                                    </Col>
+                                </Row>
+                            ))}
+                        </Slider>
+                    </Container>
+                </div>
+            }
         </>
     )
 }
