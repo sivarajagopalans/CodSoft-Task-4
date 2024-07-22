@@ -9,7 +9,7 @@ export const NavbarComponent = () => {
     <>
       <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
         <Container>
-          <Navbar.Brand href="/" ><div className='h3'>Shooping</div></Navbar.Brand>
+          <Navbar.Brand><Link to='/' className='text-decoration-none h3'>Shooping</Link></Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav" className='justify-content-end'>
             <Nav className='d-flex w-25 justify-content-around'>
