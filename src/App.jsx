@@ -14,7 +14,7 @@ function App() {
       <NavbarComponent />
       {/* <Categories/> */}
       <Routes>
-        <Route path='/' element={<Categories />} />
+        <Route index path='/' element={<Categories />} />
         <Route path='/cart' element={<Cart />} />
       </Routes>
       {/* </BrowserRouter> */}
